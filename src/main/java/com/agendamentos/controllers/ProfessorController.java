@@ -9,17 +9,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.agendamentos.dto.AlunoDTO;
-import com.agendamentos.services.AlunoService;
+import com.agendamentos.services.ProfessorService;
 
 @RestController
-@RequestMapping(value = "/aluno")
-public class AlunoController {
+@RequestMapping(value = "/professor")
+public class ProfessorController {
 
 	@Autowired
-	private AlunoService alunoService;
+	private ProfessorService professorService;
 	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<AlunoDTO> encontrarAlunoPorId(@PathVariable Long id) throws Exception {
-		return new ResponseEntity<>(alunoService.encontrarAlunoPorId(id), HttpStatus.OK);
+		return new ResponseEntity<>(professorService.encontrarAlunoPorId(id), HttpStatus.OK);
 	}
 }
