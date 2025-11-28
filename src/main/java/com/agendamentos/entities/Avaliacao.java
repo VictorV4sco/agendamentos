@@ -20,7 +20,6 @@ public class Avaliacao {
 	private Long id;
 	private LocalDateTime diaHora;
 	private Double preco;
-	private boolean pagamento;
 	private PagamentoEnum status;
 	
 	@ManyToOne
@@ -34,13 +33,12 @@ public class Avaliacao {
 	public Avaliacao() {
 	}
 
-	public Avaliacao(Long id, LocalDateTime diaHora, Double preco, boolean pagamento, PagamentoEnum status, Aluno aluno,
+	public Avaliacao(Long id, LocalDateTime diaHora, Double preco, PagamentoEnum status, Aluno aluno,
 			Professor professor) {
 		super();
 		this.id = id;
 		this.diaHora = diaHora;
 		this.preco = preco;
-		this.pagamento = pagamento;
 		this.status = status;
 		this.aluno = aluno;
 		this.professor = professor;
@@ -70,14 +68,6 @@ public class Avaliacao {
 		this.preco = preco;
 	}
 
-	public boolean isPagamento() {
-		return pagamento;
-	}
-
-	public void setPagamento(boolean pagamento) {
-		this.pagamento = pagamento;
-	}
-
 	public PagamentoEnum getStatus() {
 		return status;
 	}
@@ -104,7 +94,7 @@ public class Avaliacao {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(aluno, diaHora, id, pagamento, preco, professor, status);
+		return Objects.hash(aluno, diaHora, id, preco, professor, status);
 	}
 
 	@Override
@@ -117,9 +107,8 @@ public class Avaliacao {
 			return false;
 		Avaliacao other = (Avaliacao) obj;
 		return Objects.equals(aluno, other.aluno) && Objects.equals(diaHora, other.diaHora)
-				&& Objects.equals(id, other.id) && pagamento == other.pagamento && Objects.equals(preco, other.preco)
+				&& Objects.equals(id, other.id) && Objects.equals(preco, other.preco)
 				&& Objects.equals(professor, other.professor) && status == other.status;
 	}
-	
 	
 }
