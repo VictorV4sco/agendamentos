@@ -1,11 +1,14 @@
 package com.agendamentos.entities;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Professor {
@@ -16,6 +19,9 @@ public class Professor {
 	private String name;
 	private String email;
 	private String phone;
+	
+	@OneToMany(mappedBy = "professor")
+	private List<Avaliacao> avaliacoes = new ArrayList<>();
 
 	public Professor() {
 	}
@@ -59,9 +65,17 @@ public class Professor {
 		this.phone = phone;
 	}
 
+	public List<Avaliacao> getAvaliacoes() {
+		return avaliacoes;
+	}
+
+	public void setAvaliacoes(List<Avaliacao> avaliacoes) {
+		this.avaliacoes = avaliacoes;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(email, id, name, phone);
+		return Objects.hash(id);
 	}
 
 	@Override
@@ -73,8 +87,7 @@ public class Professor {
 		if (getClass() != obj.getClass())
 			return false;
 		Professor other = (Professor) obj;
-		return Objects.equals(email, other.email) && Objects.equals(id, other.id) && Objects.equals(name, other.name)
-				&& Objects.equals(phone, other.phone);
+		return Objects.equals(id, other.id);
 	}
 
 }
