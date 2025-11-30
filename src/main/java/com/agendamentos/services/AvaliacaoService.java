@@ -13,8 +13,8 @@ public class AvaliacaoService {
 
 	@Autowired
 	private AvaliacaoRepository avaliacaoRepository;
-	
-	public List<AvaliacaoResumidaDTO> listarAvaliacoes() {
-		return avaliacaoRepository.listarAvaliacoes();
+
+	public List<AvaliacaoResumidaDTO> listarAvaliacoes(Integer dia, Integer mes, Integer ano) {
+		return avaliacaoRepository.listarAvaliacoes(dia, mes, ano);
 	}
 }
