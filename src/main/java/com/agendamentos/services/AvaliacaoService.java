@@ -4,8 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.agendamentos.dto.AvaliacaoInserirDTO;
 import com.agendamentos.dto.AvaliacaoResumidaDTO;
+import com.agendamentos.entities.Avaliacao;
 import com.agendamentos.repositories.AvaliacaoRepository;
 
 @Service
@@ -14,7 +17,23 @@ public class AvaliacaoService {
 	@Autowired
 	private AvaliacaoRepository avaliacaoRepository;
 
+	@Transactional(readOnly = true)
 	public List<AvaliacaoResumidaDTO> listarAvaliacoes(Integer dia, Integer mes, Integer ano) {
 		return avaliacaoRepository.listarAvaliacoes(dia, mes, ano);
+	}
+	
+	@Transactional
+	public AvaliacaoInserirDTO inserirAvaliacao(AvaliacaoInserirDTO dto) {
+		Avaliacao avaliacao = new Avaliacao();
+		avaliacao.setDiaHora(dto.diaHora());
+		avaliacao.setPreco(dto.preco());
+		avaliacao.setStatus(dto.status());
+		avaliacao.setAluno(dto.aluno());
+		avaliacao.setProfessor(dto.professor());
+		
+		Avaliacao AvaliacaoSalva = avaliacaoRepository.save(avaliacao);
+		
+		return new AvaliacaoInserirDTO(AvaliacaoSalva.getId(), AvaliacaoSalva.getDiaHora(), 
+				AvaliacaoSalva.getPreco(), AvaliacaoSalva.getStatus(), AvaliacaoSalva.getAluno(), AvaliacaoSalva.getProfessor());
 	}
 }
