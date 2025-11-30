@@ -3,8 +3,6 @@ package com.agendamentos.entities;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-import com.agendamentos.enums.PagamentoEnum;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,7 +18,7 @@ public class Avaliacao {
 	private Long id;
 	private LocalDateTime diaHora;
 	private Double preco;
-	private PagamentoEnum status;
+	private String status;
 	
 	@ManyToOne
 	@JoinColumn(name = "aluno_id")
@@ -33,7 +31,7 @@ public class Avaliacao {
 	public Avaliacao() {
 	}
 
-	public Avaliacao(Long id, LocalDateTime diaHora, Double preco, PagamentoEnum status, Aluno aluno,
+	public Avaliacao(Long id, LocalDateTime diaHora, Double preco, String status, Aluno aluno,
 			Professor professor) {
 		super();
 		this.id = id;
@@ -68,11 +66,11 @@ public class Avaliacao {
 		this.preco = preco;
 	}
 
-	public PagamentoEnum getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(PagamentoEnum status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 
