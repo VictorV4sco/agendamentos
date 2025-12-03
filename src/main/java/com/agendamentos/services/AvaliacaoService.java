@@ -32,6 +32,16 @@ public class AvaliacaoService {
 				AvaliacaoSalva.getPreco(), AvaliacaoSalva.getStatus(), AvaliacaoSalva.getAluno(), AvaliacaoSalva.getProfessor());
 	}
 	
+	@Transactional
+	public AvaliacaoInserirDTO atualizarAvaliacao(Long id, AvaliacaoInserirDTO dto) {
+	    Avaliacao avaliacao = avaliacaoRepository.findById(id).orElseThrow(() -> new RuntimeException("Avaliação não encontrada"));
+	    preencherAvaliacao(avaliacao, dto);
+	    Avaliacao avaliacaoAtualizada = avaliacaoRepository.save(avaliacao);
+
+	    return new AvaliacaoInserirDTO(avaliacaoAtualizada.getId(), avaliacaoAtualizada.getDiaHora(), avaliacaoAtualizada.getPreco(), 
+	    		avaliacaoAtualizada.getStatus(), avaliacaoAtualizada.getAluno(), avaliacaoAtualizada.getProfessor());
+	}
+
 	private void preencherAvaliacao(Avaliacao avaliacao, AvaliacaoInserirDTO dto) {
 	    avaliacao.setDiaHora(dto.diaHora());
 	    avaliacao.setPreco(dto.preco());
@@ -40,5 +50,4 @@ public class AvaliacaoService {
 	    avaliacao.setProfessor(dto.professor());
 	}
 
-	
 }
