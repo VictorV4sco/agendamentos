@@ -36,4 +36,5 @@ public class AvaliacaoController {
 	public ResponseEntity<AvaliacaoInserirDTO> inserirAvaliacao(@RequestBody AvaliacaoInserirDTO dto) {
 		return new ResponseEntity<>(avaliacaoService.inserirAvaliacao(dto), HttpStatus.CREATED);
 	}
+	
 }

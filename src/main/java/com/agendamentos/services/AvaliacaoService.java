@@ -25,15 +25,20 @@ public class AvaliacaoService {
 	@Transactional
 	public AvaliacaoInserirDTO inserirAvaliacao(AvaliacaoInserirDTO dto) {
 		Avaliacao avaliacao = new Avaliacao();
-		avaliacao.setDiaHora(dto.diaHora());
-		avaliacao.setPreco(dto.preco());
-		avaliacao.setStatus(dto.status());
-		avaliacao.setAluno(dto.aluno());
-		avaliacao.setProfessor(dto.professor());
-		
+		preencherAvaliacao(avaliacao, dto);
 		Avaliacao AvaliacaoSalva = avaliacaoRepository.save(avaliacao);
 		
 		return new AvaliacaoInserirDTO(AvaliacaoSalva.getId(), AvaliacaoSalva.getDiaHora(), 
 				AvaliacaoSalva.getPreco(), AvaliacaoSalva.getStatus(), AvaliacaoSalva.getAluno(), AvaliacaoSalva.getProfessor());
 	}
+	
+	private void preencherAvaliacao(Avaliacao avaliacao, AvaliacaoInserirDTO dto) {
+	    avaliacao.setDiaHora(dto.diaHora());
+	    avaliacao.setPreco(dto.preco());
+	    avaliacao.setStatus(dto.status());
+	    avaliacao.setAluno(dto.aluno());
+	    avaliacao.setProfessor(dto.professor());
+	}
+
+	
 }
